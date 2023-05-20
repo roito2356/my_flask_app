@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% block content %}
+<!-- s14-165 ブログ投稿ページ２：HTMLの作成１ -->
+<!-- s14-170 ブログ投稿ページ６：テンプレートの編集 -->
+    <section id="blog_post">
+        <div class="container my-3">
+            <div class="row">
+                <div class="col">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>ブログ投稿</h4>
+                        </div>
+                        <div class="card-body">
+                            <form method="POST" enctype="multipart/form-data">
+                                {{ form.hidden_tag() }}
+                                <!-- タイトル -->
+                                <div class="mb-3">
+                                    {{ form.title.label(class="form-control-label") }}
+                                    {{ render_field(form.title, class="form-control") }}
+                                </div>
+                                <!-- カテゴリ -->
+                                <div class="mb-3">
+                                    {{ form.category.label(class="form-control-label") }}
+                                    {{ render_field(form.category, class="form-control") }}
+                                </div> 
+                                <!-- 要約 -->
+                                <div class="mb-3">
+                                    {{ form.summary.label(class="form-control-label") }}
+                                    {{ render_field(form.summary, class="form-control") }}
+                                </div> 
+                                <!-- s14-166 ブログ投稿ページ２：HTMLの作成２ -->
+                                <!-- 本文 -->
+                                <div class="mb-3">
+                                    {{ form.text.label(class="form-control-label") }}
+                                    {{ render_field(form.text, class="form-control form-contorl-lg") }}
+                                    <script>
+                                        CKEDITOR.replace( 'text' );
+                                    </script>
+                                </div> 
+                                <!-- アイチャッチ画像 -->
+                                <div class="mb-3">
+                                    {{ form.picture.label(class="form-control-label") }}
+                                    <br>
+                                    {% if form.picture.data %}
+                                    <div style="text-align: left;">
+                                        <img src="{{ form.picture.data }}"><!--urlforを削除s17-263-->
+                                    </div>
+                                    {% endif %}
+                                    <br>
+                                    {{ render_field(form.picture, class="form-control") }}<!--'-file'を削除s17-263-->
+                                </div>
+                                <!-- 投稿ボタン -->
+                                <div class="container mb-3">
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            {{ form.submit(class="btn btn-success w-100") }}
+                                        </div>
+                                    </div>
+                                </div>                     
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+{% endblock %}
