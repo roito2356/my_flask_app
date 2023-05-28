@@ -9,7 +9,7 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = 'mysecretkey'
 basedir = os.path.abspath(os.path.dirname(__file__))
 # s17-265 完成版Webアプリの変更：データベース(PostgreSQL) start
-# app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'data.sqlite')
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'data.sqlite') # s17-265でこのコードをコメントアウト
 uri = os.environ.get('DATABASE_URL')
 if uri:
     if uri.startswith('postgres://'):

@@ -21,7 +21,7 @@ def login():
                 login_user(user)
                 next = request.args.get('next')
                 if next == None or not next[0] == '/':
-                    next = url_for('users.user_maintenance') # 'users.'s12-141
+                    next = url_for('main.blog_maintenance') # 'users.'s12-141、'users.'から'main.'に変更s14-174
                 return redirect(next)
             else:
                 flash('パスワードが一致しません')
@@ -113,17 +113,17 @@ def delete_user(user_id):
 # s15-210 ユーザー管理ページ(ブログ投稿数)３：view関数の追加 start
 @users.route('/<int:user_id>/user_posts')
 @login_required
-def users_posts(user_id):
+def user_posts(user_id):
     form = BlogSearchForm()
     # ユーザーの取得
-    user = User.query.filter(id=user_id).first_or_404()
+    user = User.query.filter_by(id=user_id).first_or_404()
     
     # ブログ記事の取得
     page = request.args.get('page', 1, type=int)
-    blog_posts = BlogPost.query.order_by(BlogPost.id.desc()).paginate(page=page, per_page=10)
+    blog_posts = BlogPost.query.filter_by(user_id=user_id).order_by(BlogPost.id.desc()).paginate(page=page, per_page=10)
 
     # 最新記事の取得
-    recent_blog_posts = BlogPost.query.filter_by(user_id=user_id).order_by(BlogPost.id.desc()).limit(5).all()
+    recent_blog_posts = BlogPost.query.order_by(BlogPost.id.desc()).limit(5).all()
 
     # カテゴリの取得
     blog_categories = BlogCategory.query.order_by(BlogCategory.id.asc()).all()

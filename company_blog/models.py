@@ -97,8 +97,8 @@ class BlogCategory(db.Model):
         return f"CategoryID: {self.id}, CategoryName: {self.category} \n"
     
     # s15-206 カテゴリ管理ページ(ブログ投稿数)２：view関数の追加 start
-    # def count_posts(self, id):
-    #     return BlogPost.query.filter_by(category_id=id).count()
+    def count_posts(self, id):
+        return BlogPost.query.filter_by(category_id=id).count()
     # s15-206 カテゴリ管理ページ(ブログ投稿数)２：view関数の追加 end
 
 # お問合せフォームモデル
