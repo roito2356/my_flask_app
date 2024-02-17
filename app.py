@@ -1,5 +1,5 @@
-from company_blog import app # s12-143 各ファイルのコードの移行６：Blueprintの登録
+from company_blog import app
 
-if __name__ == '__main__':
-    app.run(debug=True) # s17-265でコメントアウト
+if __name__ == "__main__":
+    app.run(debug=True)
     # app.run()
